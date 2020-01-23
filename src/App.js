@@ -2,6 +2,7 @@ import React from 'react';
 import './App.sass';
 import SingleList from './Components/SingleList/SingleList';
 import { connect } from 'react-redux';
+import AddCard from './Components/AddCard/AddCard';
 
 const App = props => {
 	const { lists } = props;
@@ -9,7 +10,10 @@ const App = props => {
 		<div className='App'>
 			<div className='table'>
 				{lists.map(list => (
-					<SingleList key={list.id} title={list.title} cards={list.cards} />
+					<div className="table-bg" key={list.id}>
+						<SingleList  title={list.title} cards={list.cards} />
+						<AddCard />
+					</div>
 				))}
 			</div>
 		</div>
