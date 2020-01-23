@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import './AddCard.sass';
 import Textarea from 'react-textarea-autosize';
+import { connect } from 'react-redux';
+// import addList from '../../redux/action/listActions'
 const AddCard = () => {
 	const [toggleForm, setToggleForm] = useState(false);
 	const [text, setText] = useState('');
+
+	// const handleAddList =()=>{
+
+	// }
 	return (
 		<div className='AddCard'>
 			{toggleForm ? (
@@ -12,7 +18,7 @@ const AddCard = () => {
 						autofocus
 						value={text}
 						rows='15'
-						onChange={(e) => setText(e.target.value)}
+						onChange={e => setText(e.target.value)}
 						placeholder='Enter a title for the card...'
 					/>
 					{/* <textarea name="" id="" cols="30" rows="10"></textarea> */}
@@ -35,4 +41,4 @@ const AddCard = () => {
 	);
 };
 
-export default AddCard;
+export default connect()(AddCard);

@@ -1,3 +1,5 @@
+import { ADD_LIST } from '../types';
+
 const initialState = [
 	{
 		id: 0,
@@ -54,10 +56,19 @@ const initialState = [
 		]
 	}
 ];
-
+let id = 3;
 const listReducer = (state = initialState, action) => {
-	const { type } = action;
+	const { type, payload } = action;
 	switch (type) {
+		case ADD_LIST:
+			const newList = {
+				id,
+				title: payload,
+				cards: []
+			};
+
+			id++;
+			return [...state, newList];
 		default:
 			return state;
 	}
