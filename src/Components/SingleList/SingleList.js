@@ -1,11 +1,16 @@
-import React from 'react'
+import React from 'react';
+import './SingleList.sass'
+const SingleList = props => {
+	return (
+		<div className='SingleList'>
+			<p className='SingleList-title'>{props.title}</p>
+			{props.cards.map(card => (
+				<div className='SingleList-card-content'>
+					<p>{card.card_content}</p>
+				</div>
+			))}
+		</div>
+	);
+};
 
-const SingleList = (props) => {
-    return (
-        <div>
-            <h1>{props.title}</h1>
-        </div>
-    )
-}
-
-export default SingleList
+export default SingleList;

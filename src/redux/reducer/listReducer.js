@@ -1,7 +1,25 @@
 const initialState = [
 	{
 		id: 0,
-		title: 'title card',
+		title: 'title card 1',
+		cards: [
+			{
+				id: 0,
+				card_content: 'sample text '
+			},
+			{
+				id: 0,
+				card_content: 'sample text '
+			},
+			{
+				id: 0,
+				card_content: 'sample text '
+			}
+		]
+	},
+	{
+		id: 0,
+		title: 'title card 2',
 		cards: [
 			{
 				id: 0,
@@ -19,7 +37,7 @@ const initialState = [
 	}
 ];
 
-const  listReducer = (state= initialState, action) => {
+const listReducer = (state = initialState, action) => {
 	const { type } = action;
 	switch (type) {
 		default:
@@ -27,4 +45,4 @@ const  listReducer = (state= initialState, action) => {
 	}
 };
 
-export default listReducer
+export default listReducer;

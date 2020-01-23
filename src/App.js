@@ -1,14 +1,17 @@
 import React from 'react';
-import './App.css';
+import './App.sass';
 import SingleList from './Components/SingleList/SingleList';
 import { connect } from 'react-redux';
+
 const App = props => {
 	const { lists } = props;
 	return (
 		<div className='App'>
-			{lists.map(list => (
-				<SingleList title={list.title} card={list.card_content}/>
-			))}
+			<div className='table'>
+				{lists.map(list => (
+					<SingleList key={list.id} title={list.title} cards={list.cards} />
+				))}
+			</div>
 		</div>
 	);
 };
