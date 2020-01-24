@@ -12,6 +12,7 @@ const AddList = props => {
 			await dispatch(addList(text));
 			setToggleForm(false);
 		}
+		setText('')
 		return;
 	};
 
