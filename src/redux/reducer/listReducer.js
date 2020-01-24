@@ -1,4 +1,4 @@
-import { ADD_LIST, ADD_CARD } from '../types';
+import { ADD_LIST, ADD_CARD, DRAG_CARD } from '../types';
 
 const initialState = [
 	{
@@ -127,14 +127,14 @@ const initialState = [
 		]
 	}
 ];
-let list_id = 3;
-let card_id = 4;
+let list_id = 4;
+let card_id = 27;
 const listReducer = (state = initialState, action) => {
 	const { type, payload } = action;
 	switch (type) {
 		case ADD_LIST:
 			const newList = {
-				list_id,
+				id: list_id,
 				title: payload,
 				cards: []
 			};
@@ -147,7 +147,7 @@ const listReducer = (state = initialState, action) => {
 				id: card_id,
 				card_content: payload.text
 			};
-			card_id++;
+			card_id++ ;
 
 			const newState = state.map(list => {
 				if (list.id === payload.list_id) {
@@ -158,7 +158,28 @@ const listReducer = (state = initialState, action) => {
 			});
 			console.log('payload', payload)
 			return newState;
+		case DRAG_CARD: 
+			const {
+				droppableIdStart,
+				droppableIdEnd,
+				droppableIndexStart,
+				droppableIndexEnd,
+				// droppableId
+			} = payload;
 
+			const newState1 = [...state];
+			// If the card is on the same list
+			if(droppableIdStart === droppableIdEnd){
+				const list = state.find(list => +droppableIdStart === list.id);
+				const card = list.cards.splice(droppableIndexStart, 1);
+				list.cards.splice(droppableIndexEnd, 0, ...card)
+				console.log('holaaaaaaaaaaaaa', list.cards)
+				// console.log(droppableIdStart, droppableIdEnd)
+				// console.log('state', state)
+				// console.log()
+			}
+			return newState1
+			
 		default:
 			return state;
 	}

@@ -7,12 +7,27 @@ import AddList from './Components/AddList/AddList';
 import bg from './img/mountains.jpg';
 import Nav from './Components/Nav/Nav';
 import { DragDropContext } from 'react-beautiful-dnd';
-
+import {sortCards} from './redux/action/listActions'
 const App = props => {
 	const { lists } = props;
 	
-	const onDragEnd =()=>{
+	const onDragEnd =(result)=>{
 		//TODO: reordering logic
+		const{destination , source, draggableId} = result;
+		if(!destination){
+			return;
+		}
+
+		props.dispatch(
+			sortCards(
+				source.droppableId,
+				destination.droppableId,
+				source.index,
+				destination.index,
+				draggableId
+			)
+		)
+
 	}
 	return (
 		<DragDropContext  onDragEnd={onDragEnd}>
