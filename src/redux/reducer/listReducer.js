@@ -147,7 +147,7 @@ const listReducer = (state = initialState, action) => {
 				id: card_id,
 				card_content: payload.text
 			};
-			card_id++ ;
+			card_id++;
 
 			const newState = state.map(list => {
 				if (list.id === payload.list_id) {
@@ -156,30 +156,39 @@ const listReducer = (state = initialState, action) => {
 					return list;
 				}
 			});
-			console.log('payload', payload)
+			console.log('payload', payload);
 			return newState;
-		case DRAG_CARD: 
+		case DRAG_CARD:
 			const {
 				droppableIdStart,
 				droppableIdEnd,
 				droppableIndexStart,
-				droppableIndexEnd,
+				droppableIndexEnd
 				// droppableId
 			} = payload;
 
 			const newState1 = [...state];
 			// If the card is on the same list
-			if(droppableIdStart === droppableIdEnd){
+			if (droppableIdStart === droppableIdEnd) {
 				const list = state.find(list => +droppableIdStart === list.id);
 				const card = list.cards.splice(droppableIndexStart, 1);
-				list.cards.splice(droppableIndexEnd, 0, ...card)
-				console.log('holaaaaaaaaaaaaa', list.cards)
-				// console.log(droppableIdStart, droppableIdEnd)
-				// console.log('state', state)
-				// console.log()
+				list.cards.splice(droppableIndexEnd, 0, ...card);
+				console.log('testing', list.cards);
 			}
-			return newState1
-			
+
+			// if the card is on another list
+			if (droppableIdStart !== droppableIdEnd) {
+				//Get location from where the card is picked up
+				const listStart = state.find(list => +droppableIdStart === list.id);
+
+				// pull out the card from where was picked up
+				const card = listStart.cards.splice(droppableIndexStart, 1);
+
+				const listEnd = state.find(list => +droppableIdEnd === list.id);
+				listEnd.cards.splice(droppableIndexEnd, 0, ...card);
+			}
+			return newState1;
+
 		default:
 			return state;
 	}
