@@ -1,4 +1,4 @@
-import { ADD_LIST, ADD_CARD } from '../types';
+import { ADD_LIST } from '../types';
 export const addList = title => {
 	return {
 		type: ADD_LIST,

@@ -2,28 +2,38 @@ import React, { useState } from 'react';
 import './AddCard.sass';
 import Textarea from 'react-textarea-autosize';
 import { connect } from 'react-redux';
-// import addList from '../../redux/action/listActions'
-const AddCard = () => {
+import { addCard } from '../../redux/action/cardAction';
+
+const AddCard = props => {
 	const [toggleForm, setToggleForm] = useState(false);
 	const [text, setText] = useState('');
 
-	// const handleAddList =()=>{
+	const handleAddCard = list_id => {
+		const { dispatch } = props;
+		if (text) {
+			dispatch(addCard(list_id, text));
+		}
+		setText('')
+		setToggleForm(false);
+		console.log('IDD HEREEE', list_id)
+	};
 
-	// }
 	return (
 		<div className='AddCard'>
 			{toggleForm ? (
 				<>
 					<Textarea
-						autofocus
+						autoFocus
 						value={text}
 						rows='15'
 						onChange={e => setText(e.target.value)}
 						placeholder='Enter a title for the card...'
 					/>
-					{/* <textarea name="" id="" cols="30" rows="10"></textarea> */}
 					<div className='btn-container'>
-						<button className='add-btn' onClick={() => setToggleForm(false)}>
+						<button
+							className='add-btn'
+							onClick={() => handleAddCard(props.list_id)}
+						>
 							Add Card
 						</button>
 						<i
